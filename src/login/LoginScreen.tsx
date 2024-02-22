@@ -1,9 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 
 
 
 function LoginScreen(): JSX.Element{
+
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    function login(){
+        const dados = {
+            email: email,
+            password: password,
+        }
+
+        console.log(dados);
+    }
+
     return (
         <View style={styles.cotainer}>
             <Image style={styles.logo} resizeMode="contain"
@@ -13,13 +26,22 @@ function LoginScreen(): JSX.Element{
                 <Text style={styles.tile}>Login</Text>
             
                 <TextInput style={styles.input} placeholder="E-mail"
-                placeholderTextColor={"#151413"}
+                placeholderTextColor="#151413"
+                onChangeText={(textEmail) => setEmail(textEmail)}
                 />
                 <TextInput style={styles.input} placeholder="Senha"
-                placeholderTextColor={"#151413"}
+                placeholderTextColor="#151413"
+                onChangeText={(textPassword) => setPassword(textPassword)}
+                secureTextEntry
                 />
+                <TouchableOpacity style={styles.button} onPress={()=>{login()}}>
+                    <Text style={styles.buttonText}>Entrar</Text>
+                </TouchableOpacity>
+                <TouchableOpacity >
+                    <Text style={styles.forgotPassword}>Esqueceu a senha?</Text>
+                </TouchableOpacity>
                 <TouchableOpacity>
-                    <Text>Entrar</Text>
+                    <Text style={styles.forgotPassword}>Não possui conta? Cadastre-se!</Text>
                 </TouchableOpacity>
             </View>
 
@@ -66,6 +88,22 @@ input: {
     borderRadius: 8,
     borderWidth: 1,
     borderColor: 'black'
+},
+button: {
+    backgroundColor: '#6a03de',
+    height: 40,
+    borderRadius: 8
+},
+buttonText: {
+    color: '#FFFFFF',
+    textAlign: 'center',
+    fontSize: 16,
+    lineHeight: 40
+},
+forgotPassword: {
+    color: '#6a03de',
+    textAlign: 'center',
+    marginTop: 10
 }
 
 });
